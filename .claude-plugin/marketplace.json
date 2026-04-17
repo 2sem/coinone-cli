@@ -1,5 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "version": "1.0.0",
   "name": "coinone-cli",
   "description": "Coinone cryptocurrency exchange CLI tools for querying market data, managing balances, and placing guarded orders via the Coinone public and private APIs.",
   "owner": {
