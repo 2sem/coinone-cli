@@ -21,6 +21,18 @@ npm install -g coinone-api-cli
 coinone doctor --json
 ```
 
+Or via Homebrew:
+
+```bash
+brew tap 2sem/tap
+brew install coinone
+```
+
+## Skill Auto-Sync
+
+`coinone-cli/SKILL.md` is synced weekly from [2sem/coinone-api-cli](https://github.com/2sem/coinone-api-cli/tree/main/skills/coinone-api-cli) via GitHub Actions.
+
 ## Source
 
-Skill definitions are synced weekly from [2sem/coinone-api-cli](https://github.com/2sem/coinone-api-cli/tree/main/skills).
+- CLI source: [2sem/coinone-api-cli](https://github.com/2sem/coinone-api-cli)
+- npm: [`coinone-api-cli`](https://www.npmjs.com/package/coinone-api-cli)

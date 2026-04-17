@@ -1,0 +1,48 @@
+name: Sync Skill from coinone-api-cli
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch upstream SKILL.md
+        run: |
+          curl -sSf \
+            "https://raw.githubusercontent.com/2sem/coinone-api-cli/main/skills/coinone-api-cli/SKILL.md" \
+            -o /tmp/upstream-SKILL.md
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if diff -q coinone-cli/SKILL.md /tmp/upstream-SKILL.md > /dev/null 2>&1; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Apply update
+        if: steps.diff.outputs.changed == 'true'
+        run: cp /tmp/upstream-SKILL.md coinone-cli/SKILL.md
+
+      - name: Open PR
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: sync/skill-update
+          delete-branch: true
+          commit-message: 'sync: update coinone-cli SKILL.md from upstream'
+          title: 'sync: update SKILL.md from coinone-api-cli'
+          body: |
+            Automated weekly sync of `coinone-cli/SKILL.md` from [2sem/coinone-api-cli](https://github.com/2sem/coinone-api-cli).
+
+            Review changes before merging to ensure the marketplace skill stays accurate.

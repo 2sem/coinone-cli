@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "coinone-cli",
+  "description": "Coinone cryptocurrency exchange CLI tools for querying market data, managing balances, and placing guarded orders via the Coinone public and private APIs.",
+  "owner": {
+    "name": "2sem",
+    "url": "https://github.com/2sem"
+  },
+  "plugins": [
+    {
+      "name": "coinone-cli",
+      "description": "Query Coinone market data, inspect balances, and place guarded orders from the command line using the coinone-api-cli package.",
+      "source": "./coinone-cli",
+      "category": "cli"
+    }
+  ]
+}
